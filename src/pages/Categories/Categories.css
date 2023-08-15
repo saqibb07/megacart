@@ -1,0 +1,17 @@
+.categories-container{
+    background-color: #e8f4f8;
+  display: block;
+  color: gray;
+  font-size: medium;
+  padding: 9px;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+}
+.categories-container:focus{
+    outline: none;
+    border: none;
+}
+.option:hover{
+  background-color: #e8f4f8;
+}
