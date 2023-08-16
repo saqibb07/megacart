@@ -77,7 +77,6 @@ const Navbar = () => {
     </div>
       
       </div>
-  
 
     <div className='product-list'>
         <Product text={text} category={category}/>

@@ -48,6 +48,7 @@ const Card = ({ title, price, img, rate, review, id }) => {
               dispatch(increment())
             }}
           >
+
             Add to Cart
           </button>
         </div>
