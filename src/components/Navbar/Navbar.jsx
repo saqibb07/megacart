@@ -54,6 +54,29 @@ const Navbar = () => {
       
       </div>
     </div>
+    <div className="selectContainerr">
+      <div>
+       
+    
+      <select className="selectInput">
+        <option>All</option>
+      </select>
+    </div>
+      <div className="searchContainer">
+      <input
+        type="text"
+        name="search"
+        className="searchInput"
+        placeholder="Search here..."
+        autoComplete="off"
+      />
+      <div className="magnifyingContainer {
+">
+        <MagnifyingGlassIcon className="icon" />
+      </div>
+    </div>
+      
+      </div>
 
     <div className='product-list'>
         <Product text={text} category={category}/>
