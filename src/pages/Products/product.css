@@ -3,3 +3,13 @@
   flex-wrap: wrap;
   justify-content: space-around;
 }
+.parent {
+  display: flex;
+  flex-direction: column;
+}
+.heading {
+  padding-left: 40px;
+  color: #008ecc;
+  font-size: 32px;
+  font-weight: 500;
+}
