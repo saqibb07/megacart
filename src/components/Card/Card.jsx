@@ -4,13 +4,22 @@ import './Card.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { increment } from '../../Redux/slices/CartSlice'
 
-const Card = ({ title, price, img, rate, review, id }) => {
+const Card = ({ data }) => {
   const [showCard, setShowCard] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
   const [ratingArray, setRatingArray] = useState([])
+  const [isHovered, setIsHovered] = useState(false)
 
+  const handleMouseEnter = () => {
+    setIsHovered(true)
+    setShowCard(true)
+  }
+
+  const handleMouseLeave = () => {
+    setIsHovered(false)
+    setShowCard(false)
+  }
   const cart = useSelector(state => state)
-  console.log(cart)
 
   // choose the screen size
   const handleResize = () => {
@@ -31,15 +40,20 @@ const Card = ({ title, price, img, rate, review, id }) => {
   }, [])
   let rating = 0
   useEffect(() => {
-    if (rate) {
-      rating = Math.floor(rate)
+    if (data.rating.rate) {
+      rating = Math.floor(data.rating.rate)
       const array = Array.from({ length: rating }, (_, index) => index)
       setRatingArray(array)
     }
-  }, [rate])
+  }, [data.rating.rate])
 
   return (
-    <div className={`card ${showCard && 'hoverBtn'}`} onMouseEnter={() => setShowCard(true)} onMouseLeave={() => setShowCard(false)}>
+    <div className={`card ${showCard && 'hoverBtn'} ${isHovered && 'hovered'}`} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+      {data.discount && (
+        <div className="discountCard">
+          {data.discount}%<span>OFF</span>
+        </div>
+      )}
       {showCard && !isMobile && (
         <div className="btnContainer">
           <button
@@ -48,19 +62,18 @@ const Card = ({ title, price, img, rate, review, id }) => {
               dispatch(increment())
             }}
           >
-
             Add to Cart
           </button>
         </div>
       )}
       <div className="imageContainer">
-        <img src={img} alt="Avatar" className={`img ${showCard && 'hoverBtn'}`} />
+        <img src={data.image} alt="Avatar" className="img" />
       </div>
       <div className="container">
         <div className={`${isMobile && 'titleContainer'}`}>
-          <p>{title}</p>
+          <p>{data.title}</p>
           <div>
-            <b>${price}</b>
+            <b>${data.price}</b>
           </div>
         </div>
 
@@ -70,9 +83,9 @@ const Card = ({ title, price, img, rate, review, id }) => {
               <StarIcon key={num} className={`starIcon ${num < rating ? 'fillStar' : 'emptyStar'}`} />
             ))}
           </div>
-          {isMobile && showCard && (
+          {isMobile && (
             <button
-              className={`mobBtn ${showCard && 'hoverBtn'}`}
+              className={`mobBtn`}
               onClick={() => {
                 dispatch(increment())
               }}
